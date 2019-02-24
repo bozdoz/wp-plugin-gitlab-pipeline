@@ -1,0 +1,40 @@
+version: '3.3'
+
+services:
+  db:
+    image: mariadb
+    volumes:
+      - wp_db:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+
+  cli:
+    build: .
+    depends_on:
+      - db
+    volumes:
+      - wordpress:/var/www/html
+      - ./:/var/www/html/wp-content/plugins/trigger-pipeline
+      - ./theme:/var/www/html/wp-content/themes/${WP_THEME}
+    environment:
+      WORDPRESS_PORT: ${WORDPRESS_PORT:-1234}
+
+  wordpress:
+    image: wordpress
+    depends_on:
+      - cli
+    volumes:
+      - wordpress:/var/www/html
+      - ./:/var/www/html/wp-content/plugins/trigger-pipeline
+      - ./theme:/var/www/html/wp-content/themes/${WP_THEME}
+    ports:
+      - ${WORDPRESS_PORT:-1234}:80
+    restart: always
+    environment:
+      WORDPRESS_DB_PASSWORD: rootpass
+      WORDPRESS_DB_HOST: db:3306
+
+volumes:
+  wp_db:
+  wordpress:
