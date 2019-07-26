@@ -10,15 +10,14 @@ services:
       MYSQL_ROOT_PASSWORD: rootpass
 
   cli:
-    build: .
+    image: bozdoz/wordpress-initialize
+    env_file: .env
     depends_on:
       - db
-    volumes:
+    volumes: 
       - wordpress:/var/www/html
       - ./:/var/www/html/wp-content/plugins/trigger-pipeline
       - ./theme:/var/www/html/wp-content/themes/${WP_THEME}
-    environment:
-      WORDPRESS_PORT: ${WORDPRESS_PORT:-1234}
 
   wordpress:
     image: wordpress
@@ -29,7 +28,7 @@ services:
       - ./:/var/www/html/wp-content/plugins/trigger-pipeline
       - ./theme:/var/www/html/wp-content/themes/${WP_THEME}
     ports:
-      - ${WORDPRESS_PORT:-1234}:80
+      - ${WP_PORT:-1234}:80
     restart: always
     environment:
       WORDPRESS_DB_PASSWORD: rootpass
