@@ -26,7 +26,7 @@ class Admin
     public static function init()
     {
         if (!self::$_instance) {
-            self::$_instance = new self();
+            self::$_instance = new self;
         }
 
         return self::$_instance;

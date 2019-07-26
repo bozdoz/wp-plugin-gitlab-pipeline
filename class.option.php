@@ -56,14 +56,14 @@ class Option
         }
 
         $option_filter = array(
-            'display_name' => FILTER_SANITIZE_STRING,
-            'default' => null,
-            'type' => FILTER_SANITIZE_STRING,
-            'options' => array(
-                'filter' => FILTER_SANITIZE_STRING,
-                'flags' => FILTER_FORCE_ARRAY
+            'display_name'  => FILTER_SANITIZE_STRING,
+            'default'       => null,
+            'type'          => FILTER_SANITIZE_STRING,
+            'options'       => array(
+                'filter'    => FILTER_SANITIZE_STRING,
+                'flags'     => FILTER_FORCE_ARRAY
             ),
-            'helptext' => null
+            'helptext'      => null
         );
 
         // get matching keys only
@@ -87,7 +87,9 @@ class Option
      */
     function widget($name, $value)
     {
-        switch ($this->type) { case 'text': ?>
+        switch ($this->type) { 
+        
+        case 'text': ?>
         <input 
             class="full-width" 
             name="<?php echo $name; ?>" 
@@ -95,15 +97,17 @@ class Option
             id="<?php echo $name; ?>" 
             value="<?php echo htmlspecialchars($value); ?>" 
             />
-            <?php break;case 'textarea': ?>
-
+            <?php break;
+            
+        case 'textarea': ?>
         <textarea 
             id="<?php echo $name; ?>"
             class="full-width" 
             name="<?php echo $name; ?>"><?php echo htmlspecialchars($value); ?></textarea>
 
-            <?php break;case 'checkbox': ?>
-
+            <?php break;
+            
+        case 'checkbox': ?>
         <input 
             class="checkbox" 
             name="<?php echo $name; ?>" 
@@ -113,20 +117,26 @@ class Option
                 echo ' checked="checked"';
             } ?> 
             />
-            <?php break;case 'select': ?>
+            <?php break;
+
+        case 'select': ?>
         <select id="<?php echo $name; ?>"
             name="<?php echo $name; ?>"
             class="full-width">
         <?php foreach ($this->options as $o => $n) { ?>
             <option value="<?php echo $o; ?>"<?php if ($value == $o) {
-    echo ' selected';
-} ?>>
+                echo ' selected';
+            } ?>>
                 <?php echo $n; ?>
             </option>
         <?php } ?>
         </select>
-                <?php break;default: ?>
+            <?php break;
+        default: ?>
+
         <div>No option type chosen for <?php echo $name; ?> with value <?php echo htmlspecialchars($value); ?></div>
-            <?php break;}
+            <?php 
+            break;
+        }
     }
 }
