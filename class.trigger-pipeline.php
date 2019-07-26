@@ -21,7 +21,7 @@ class Trigger_Pipeline
     public static function init()
     {
         if (!self::$instance) {
-            self::$instance = new self();
+            self::$instance = new self;
         }
 
         return self::$instance;
@@ -46,11 +46,24 @@ class Trigger_Pipeline
         $settings = \TriggerPipeline\Settings::init();
 
         if ($settings->get('trigger_on_save')) {
-            add_action('save_post', array($this, 'save_post'));
+            add_action('save_post', array($this, 'on_post_update'));
+            add_action('delete_post', array($this, 'on_post_update'));
         }
     }
 
-    public function save_post($post_id)
+    public function on_post_update($post_id)
+    {
+        if (
+            wp_is_post_revision($post_id) ||
+            wp_is_post_autosave($post_id)
+        ):
+            return;
+        endif;
+
+        Trigger_Pipeline::trigger();
+    }
+
+    public static function trigger()
     {
         include_once TRIGGER_PIPELINE__PLUGIN_DIR . 'class.settings.php';
         $settings = \TriggerPipeline\Settings::init();
@@ -61,15 +74,10 @@ class Trigger_Pipeline
         if (
             !$url ||
             !$token ||
-            !$ref ||
-            wp_is_post_revision($post_id) ||
-            wp_is_post_autosave($post_id)
+            !$ref
         ):
             return;
         endif;
-
-        // Send email to admin.
-        wp_mail('admin@example.com', 'deploy', 'deploying to gitlab');
 
         $fields = array(
             'token' => $token,
