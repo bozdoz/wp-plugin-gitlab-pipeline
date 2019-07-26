@@ -34,7 +34,7 @@ $version = $plugin_data['Version'];
     }
     ?>
 <div class="notice notice-success is-dismissible">
-    <p><?php _e('Options Updated!', 'leaflet-map'); ?></p>
+    <p><?php _e('Options Updated!', 'trigger-pipeline'); ?></p>
 </div>
 <?php
 } elseif (isset($_POST['reset'])) {
@@ -42,17 +42,15 @@ $version = $plugin_data['Version'];
 <div class="notice notice-success is-dismissible">
     <p><?php _e(
         'Options have been reset to default values!',
-        'leaflet-map'
+        'trigger-pipeline'
     ); ?></p>
 </div>
 <?php
-} elseif (isset($_POST['clear-geocoder-cache'])) {
-
-    include_once LEAFLET_MAP__PLUGIN_DIR . 'class.geocoder.php';
-    Leaflet_Geocoder::remove_caches();
-    ?>
+} elseif (isset($_POST['trigger-now'])) {
+    Trigger_Pipeline::trigger();
+?>
 <div class="notice notice-success is-dismissible">
-    <p><?php _e('Location caches have been cleared!', 'leaflet-map'); ?></p>
+    <p><?php _e('Pipeline Triggered!', 'trigger-pipeline'); ?></p>
 </div>
 <?php
 } ?>
@@ -60,7 +58,7 @@ $version = $plugin_data['Version'];
     <div class="wrap">
     <form method="post">
         <div class="container">
-            <h2><?php _e('Settings', 'leaflet-map'); ?></h2>
+            <h2><?php _e('Settings', 'trigger-pipeline'); ?></h2>
             <hr>
         </div>
     <?php foreach ($settings->options as $name => $option) {
@@ -88,7 +86,20 @@ $version = $plugin_data['Version'];
             name="submit" 
             id="submit" 
             class="button button-primary" 
-            value="<?php _e('Save Changes', 'trigger-pipeline'); ?>">
+            value="<?php _e('Save Changes', 'trigger-pipeline'); ?>" 
+        />
+        <input type="submit" 
+            name="trigger-now" 
+            id="trigger-now" 
+            class="button button-secondary" 
+            value="<?php _e('Trigger Now', 'trigger-pipeline'); ?>"
+        />
+        <input type="submit" 
+            name="reset" 
+            id="reset" 
+            class="button button-secondary" 
+            value="<?php _e('Reset to Defaults', 'trigger-pipeline'); ?>"
+        />
     </div>
 
     </form>
