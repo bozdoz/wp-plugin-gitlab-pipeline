@@ -47,8 +47,7 @@ $version = $plugin_data['Version'];
 </div>
 <?php
 } elseif (isset($_POST['trigger-now'])) {
-    Trigger_Pipeline::trigger();
-?>
+    Trigger_Pipeline::trigger(); ?>
 <div class="notice notice-success is-dismissible">
     <p><?php _e('Pipeline Triggered!', 'trigger-pipeline'); ?></p>
 </div>
