@@ -1,11 +1,4 @@
 <?php
-/**
- * Used to get and set values
- *
- * Features:
- * * Add prefixes to db options
- * * built-in admin settings page method
- */
 
 namespace TriggerPipeline;
 
@@ -16,6 +9,13 @@ if (!defined('ABSPATH')) {
 
 require_once TRIGGER_PIPELINE__PLUGIN_DIR . 'class.option.php';
 
+/**
+ * Used to get and set values
+ *
+ * Features:
+ * * Add prefixes to db options
+ * * built-in admin settings page method
+ */
 class Settings
 {
     /**
@@ -34,7 +34,7 @@ class Settings
     public static function init()
     {
         if (!self::$_instance) {
-            self::$_instance = new self();
+            self::$_instance = new self;
         }
 
         return self::$_instance;
@@ -133,8 +133,8 @@ class Settings
     {
         foreach ($this->options as $name => $option) {
             if (
-                !array_key_exists('noreset', $options) ||
-                $options['noreset'] != true
+                !property_exists($option, 'noreset') ||
+                $option->noreset != true
             ) {
                 $this->delete($name);
             }
