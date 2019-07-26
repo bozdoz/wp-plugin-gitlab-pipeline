@@ -5,7 +5,7 @@
   "main": "index.js",
   "private": true,
   "scripts": {
-    "start": "docker-compose up --build && exit 0",
+    "start": "docker-compose up && exit 0",
     "restart": "npm run destroy && npm run start",
     "destroy": "docker-compose down -v",
     "wordpress": "docker-compose run wordpress bash",
