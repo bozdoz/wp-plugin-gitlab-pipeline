@@ -1,14 +1,14 @@
-=== Trigger Pipeline ===
+=== Trigger GitLab Pipeline ===
 Author: bozdoz
-Author URI: https://www.twitter.com/bozdoz/
-Plugin URI: https://wordpress.org/plugins/trigger-pipeline/
+Author URI: https://bozdoz.com/
+Plugin URI: https://wordpress.org/plugins/trigger-gitlab-pipeline/
 Contributors: bozdoz
 Donate link: https://www.paypal.me/bozdoz
 Tags: gitlab, pipeline, webhook, hook, trigger, ci, cd, continuous delivery
 Requires at least: 3.0.1
 Tested up to: 5.0.2
-Version: 2.13.0
-Stable tag: 2.13.0
+Version: 0.1.0
+Stable tag: 0.1.0
 License: GPLv2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -20,9 +20,7 @@ After a post or page is updated or created, this plugin sends a POST request to 
 
 = More =
 
-Check out the **source code** on [GitHub](https://github.com/bozdoz/trigger-pipeline)!
-
-Shoot me a question [@bozdoz](https://www.twitter.com/bozdoz/).
+Check out the **source code** on [GitHub](https://github.com/bozdoz/wp-plugin-gitlab-pipeline)!
 
 == Installation ==
 

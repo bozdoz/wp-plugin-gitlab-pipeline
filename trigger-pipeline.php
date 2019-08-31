@@ -2,10 +2,10 @@
 
 /**
  * Plugin Name: Trigger Pipeline
- * Plugin URI: https://wordpress.org/plugins/trigger-pipeline/
+ * Plugin URI: https://wordpress.org/plugins/trigger-gitlab-pipeline/
  * Description: A plugin to trigger a GitLab pipeline after a post or page is updated or created.
  * Author: bozdoz
- * Author URI: https://twitter.com/bozdoz/
+ * Author URI: https://bozdoz.com/
  * Text Domain: trigger-pipeline
  * Version: 0.1.0
  * License: GPL2
@@ -18,9 +18,6 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with Trigger Pipeline. If not, see  https://github.com/bozdoz/wp-plugin-trigger-pipeline/blob/master/LICENSE.
  */
 
 // Exit if accessed directly
